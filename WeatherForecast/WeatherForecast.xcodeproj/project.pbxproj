@@ -22,6 +22,7 @@
 		D65E099D2A16CF4C00309613 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E099C2A16CF4C00309613 /* Request.swift */; };
 		D6EC9B962A16D5FD007A794A /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B952A16D5FD007A794A /* ApiErrors.swift */; };
 		D6EC9B982A16DA57007A794A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B972A16DA57007A794A /* Errors.swift */; };
+		D6EC9B9A2A16DEC4007A794A /* WeatherApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B992A16DEC4007A794A /* WeatherApiData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		D65E099C2A16CF4C00309613 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D6EC9B952A16D5FD007A794A /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
 		D6EC9B972A16DA57007A794A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		D6EC9B992A16DEC4007A794A /* WeatherApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiData.swift; sourceTree = "<group>"; };
 		DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 		D65E09872A161AC300309613 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D6EC9B992A16DEC4007A794A /* WeatherApiData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */,
 				D65E09952A16CDB200309613 /* Parameters.swift in Sources */,
 				D65E099D2A16CF4C00309613 /* Request.swift in Sources */,
+				D6EC9B9A2A16DEC4007A794A /* WeatherApiData.swift in Sources */,
 				D65E099B2A16CEBA00309613 /* ResponseDecoder.swift in Sources */,
 				D6EC9B962A16D5FD007A794A /* ApiErrors.swift in Sources */,
 				D65E09972A16CE4800309613 /* RequestProtocol.swift in Sources */,
