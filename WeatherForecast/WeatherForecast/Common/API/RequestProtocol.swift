@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Result
 
-typealias RequestCompletionClosure = (Result<[Decodable], Error>) -> Void   // TODO: Result pod
+typealias RequestCompletionClosure = (Result<[Decodable], Error>) -> Void
 
 protocol RequestProtocol {
     var query: QueryProtocol { get }
