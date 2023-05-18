@@ -14,12 +14,14 @@
 		D65E09802A16199600309613 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D65E097F2A16199600309613 /* Preview Assets.xcassets */; };
 		D65E098E2A161B8000309613 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E098D2A161B8000309613 /* AppTheme.swift */; };
 		D65E09912A16CB7A00309613 /* ApiWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09902A16CB7A00309613 /* ApiWorker.swift */; };
-		D65E09932A16CD1400309613 /* NetworkProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09922A16CD1400309613 /* NetworkProtocols.swift */; };
+		D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09922A16CD1400309613 /* ApiProtocols.swift */; };
 		D65E09952A16CDB200309613 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09942A16CDB200309613 /* Parameters.swift */; };
 		D65E09972A16CE4800309613 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09962A16CE4800309613 /* RequestProtocol.swift */; };
 		D65E09992A16CE6E00309613 /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09982A16CE6E00309613 /* ResponseProtocol.swift */; };
 		D65E099B2A16CEBA00309613 /* ResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E099A2A16CEBA00309613 /* ResponseDecoder.swift */; };
 		D65E099D2A16CF4C00309613 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E099C2A16CF4C00309613 /* Request.swift */; };
+		D6EC9B962A16D5FD007A794A /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B952A16D5FD007A794A /* ApiErrors.swift */; };
+		D6EC9B982A16DA57007A794A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B972A16DA57007A794A /* Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +34,14 @@
 		D65E097F2A16199600309613 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D65E098D2A161B8000309613 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		D65E09902A16CB7A00309613 /* ApiWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiWorker.swift; sourceTree = "<group>"; };
-		D65E09922A16CD1400309613 /* NetworkProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocols.swift; sourceTree = "<group>"; };
+		D65E09922A16CD1400309613 /* ApiProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProtocols.swift; sourceTree = "<group>"; };
 		D65E09942A16CDB200309613 /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		D65E09962A16CE4800309613 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		D65E09982A16CE6E00309613 /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
 		D65E099A2A16CEBA00309613 /* ResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDecoder.swift; sourceTree = "<group>"; };
 		D65E099C2A16CF4C00309613 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		D6EC9B952A16D5FD007A794A /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
+		D6EC9B972A16DA57007A794A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,7 +63,6 @@
 				DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */,
 				05D8E134A5C451C5BD8F8185 /* Pods-WeatherForecast.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -109,7 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				D65E098D2A161B8000309613 /* AppTheme.swift */,
-				D65E098F2A16C87200309613 /* API */,
+				D6EC9B972A16DA57007A794A /* Errors.swift */,
+				D65E098F2A16C87200309613 /* Api Infrastructure */,
 				D65E09892A161AF000309613 /* Workers */,
 			);
 			path = Common;
@@ -159,17 +163,18 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		D65E098F2A16C87200309613 /* API */ = {
+		D65E098F2A16C87200309613 /* Api Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				D65E09922A16CD1400309613 /* NetworkProtocols.swift */,
+				D65E09922A16CD1400309613 /* ApiProtocols.swift */,
 				D65E09962A16CE4800309613 /* RequestProtocol.swift */,
 				D65E09982A16CE6E00309613 /* ResponseProtocol.swift */,
-				D65E09942A16CDB200309613 /* Parameters.swift */,
 				D65E099A2A16CEBA00309613 /* ResponseDecoder.swift */,
+				D65E09942A16CDB200309613 /* Parameters.swift */,
 				D65E099C2A16CF4C00309613 /* Request.swift */,
+				D6EC9B952A16D5FD007A794A /* ApiErrors.swift */,
 			);
-			path = API;
+			path = "Api Infrastructure";
 			sourceTree = "<group>";
 		};
 		F8336ADD8544B6E7632771A3 /* Frameworks */ = {
@@ -298,11 +303,13 @@
 				D65E097B2A16199300309613 /* ContentView.swift in Sources */,
 				D65E09992A16CE6E00309613 /* ResponseProtocol.swift in Sources */,
 				D65E09912A16CB7A00309613 /* ApiWorker.swift in Sources */,
+				D6EC9B982A16DA57007A794A /* Errors.swift in Sources */,
 				D65E09792A16199300309613 /* WeatherForecastApp.swift in Sources */,
-				D65E09932A16CD1400309613 /* NetworkProtocols.swift in Sources */,
+				D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */,
 				D65E09952A16CDB200309613 /* Parameters.swift in Sources */,
 				D65E099D2A16CF4C00309613 /* Request.swift in Sources */,
 				D65E099B2A16CEBA00309613 /* ResponseDecoder.swift in Sources */,
+				D6EC9B962A16D5FD007A794A /* ApiErrors.swift in Sources */,
 				D65E09972A16CE4800309613 /* RequestProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,8 @@ protocol ResponseDecoderProtocol {
     func parseData(data: Data?) throws -> [Decodable]
 }
 
-/*struct ResponseDecoder<DecodableType>: ResponseDecoderProtocol where DecodableType: Decodable {
+struct ResponseDecoder<DecodableType>: ResponseDecoderProtocol where DecodableType: Decodable {
+    
     func parseData(data: Data?) throws -> [Decodable] {
         guard let data = data else {
             throw ParsingError.noData
@@ -19,15 +20,17 @@ protocol ResponseDecoderProtocol {
 
         do {
             let result = try JSONDecoder().decode(DecodableType.self, from: data)
-            if let resultTable = result as? [Decodable] {
-                return resultTable
+
+            if let resultArray = result as? [Decodable] {
+                return resultArray
             } else {
                 return [result]
             }
         } catch let error {
             let dataString = String(data: data, encoding: .utf8)
-            Logger.log("Error in parsing JSON:\n\(error)\nin:\(self)\nJSON:\n\(dataString ?? "") ")
+            print("Error in parsing JSON:\n\(error)\nin:\(self)\nJSON:\n\(dataString ?? "") ")
+
             throw ParsingError.invalidJson
         }
     }
-}*/
+}

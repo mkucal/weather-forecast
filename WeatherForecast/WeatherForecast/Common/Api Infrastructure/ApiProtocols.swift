@@ -1,5 +1,5 @@
 //
-//  NetworkProtocols.swift
+//  ApiProtocols.swift
 //  WeatherForecast
 //
 //  Created by Michał Kucal on 18/05/2023.
@@ -17,7 +17,7 @@ enum HttpMethod: String {
     case post = "POST"
 }
 
-protocol NetworkServiceProtocol {
+protocol ApiServiceProtocol {
     var scheme: ServiceScheme { get }
     var host: String { get }
     var version: String { get set }
@@ -31,6 +31,6 @@ protocol QueryProtocol {
     var decoder: ResponseDecoderProtocol? { get }
     var method: HttpMethod { get }
     var endpoint: EndpointProtocol { get }
-    var service: NetworkServiceProtocol { get }
+    var service: ApiServiceProtocol { get }
     var parameters: Parameters { get set }
 }
