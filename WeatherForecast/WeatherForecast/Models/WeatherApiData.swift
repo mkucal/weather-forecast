@@ -164,10 +164,25 @@ struct DailyForecastUnitsApiData: Decodable {
 }
 
 struct DailyForecastApiData: Decodable {
+    var time: [Date]?
+    var weatherCode: [Int]?
+    var temperatureMax: [Double]?
+    var temperatureMin: [Double]?
+    var apparentTemperatureMax: [Double]?
+    var apparentTemperatureMin: [Double]?
+    var precipitationSum: [Double]?
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        // TODO: time = try container.decodeIfPresent(String.self, forKey: .time)
+
+        weatherCode = try container.decodeIfPresent([Int].self, forKey: .weatherCode)
+        temperatureMax = try container.decodeIfPresent([Double].self, forKey: .temperatureMax)
+        temperatureMin = try container.decodeIfPresent([Double].self, forKey: .temperatureMin)
+        apparentTemperatureMax = try container.decodeIfPresent([Double].self, forKey: .apparentTemperatureMax)
+        apparentTemperatureMin = try container.decodeIfPresent([Double].self, forKey: .apparentTemperatureMin)
+        precipitationSum = try container.decodeIfPresent([Double].self, forKey: .precipitationSum)
     }
 
     private enum CodingKeys: String, CodingKey {
