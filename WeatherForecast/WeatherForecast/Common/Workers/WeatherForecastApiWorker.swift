@@ -6,16 +6,25 @@
 //
 
 import Foundation
+import CoreLocation
 import Hydra
 
 protocol WeatherForecastApiWorkerProtocol {
-    func fetchHourlyWeatherForecast() -> Promise<WeatherApiData>
+    func fetchHourlyWeatherForecast(for location: CLLocationCoordinate2D) -> Promise<WeatherApiData>
 }
 
 class WeatherForecastApiWorker: WeatherForecastApiWorkerProtocol {
 
-    func fetchHourlyWeatherForecast() -> Promise<WeatherApiData> {
-        let query = FetchWeatherForecastQuery()
+    func fetchHourlyWeatherForecast(for location: CLLocationCoordinate2D) -> Promise<WeatherApiData> {
+        let hourlyAttributes: [WeatherForecastAttributes] = [.temperature, .apparentTemperature,
+                                                             .relativeHumidity, .precipitation,
+                                                             .weatherCode, .surfacePressure,
+                                                             .windSpeed, .windDirection]
+        let queryParams = FetchWeatherForecastParams(location: location, fetchCurrentWeather: true,
+                                                     forecastDaysNumber: 2, timeZone: TimeZone.current,
+                                                     hourlyForecastAttributes: hourlyAttributes)
+
+        let query = FetchWeatherForecastQuery(params: queryParams)
         let request = Request(query: query, session: URLSession.shared)
 
         return Promise { resolved, rejected, _ in

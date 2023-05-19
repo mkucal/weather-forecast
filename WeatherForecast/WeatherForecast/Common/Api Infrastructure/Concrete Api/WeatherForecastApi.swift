@@ -6,8 +6,19 @@
 //
 
 import Foundation
+import CoreLocation
 
-private enum ForecastAttributes: String {
+struct WeatherForecastService: ApiServiceProtocol {
+    let scheme: ServiceScheme = .https
+    let host: String = "api.open-meteo.com"
+    var version: String = "v1"
+}
+
+struct WeatherForecastEndpoint: EndpointProtocol {
+    let path: String = "forecast"
+}
+
+enum WeatherForecastAttributes: String {
     case temperature = "temperature_2m"
     case apparentTemperature = "apparent_temperature"
     case relativeHumidity = "relativehumidity_2m"
@@ -18,43 +29,41 @@ private enum ForecastAttributes: String {
     case windDirection = "winddirection_10m"
 }
 
+struct FetchWeatherForecastParams {
+    let location: CLLocationCoordinate2D
+    let fetchCurrentWeather: Bool
+    let forecastDaysNumber: Int
+    let timeZone: TimeZone
+    let hourlyForecastAttributes: [WeatherForecastAttributes]?
+}
+
 private struct ParameterKeyPath {
     static let latitude = "latitude"
     static let longitude = "longitude"
-    static let hourly = "hourly"
+    static let hourlyForecast = "hourly"
     static let currentWeather = "current_weather"
-    static let forecastDays = "forecast_days"
+    static let forecastDaysNumber = "forecast_days"
     static let timeZone = "timezone"
-}
-
-struct WeatherForecastService: ApiServiceProtocol {
-    let scheme: ServiceScheme = .https
-    let host: String = "api.open-meteo.com"
-    var version: String = "v1"
-}
-
-struct WeatherForecast: EndpointProtocol {
-    let path: String = "forecast"
 }
 
 struct FetchWeatherForecastQuery: QueryProtocol {
     var decoder: ResponseDecoderProtocol? = ResponseDecoder<WeatherApiData>()
     var method: HttpMethod = .get
-    var endpoint: EndpointProtocol = WeatherForecast()
+    var endpoint: EndpointProtocol = WeatherForecastEndpoint()
     var service: ApiServiceProtocol = WeatherForecastService()
     var parameters: Parameters = Parameters(encoding: .url)
 
-    init() {
-        parameters[ParameterKeyPath.latitude] = String(describing: 52.41)
-        parameters[ParameterKeyPath.longitude] = String(describing: 16.93)
+    init(params: FetchWeatherForecastParams) {
+        parameters[ParameterKeyPath.latitude] = String(describing: params.location.latitude)
+        parameters[ParameterKeyPath.longitude] = String(describing: params.location.longitude)
 
-        let forecastAttributes: [ForecastAttributes] = [.temperature, .apparentTemperature,
-                                                        .relativeHumidity, .precipitation,
-                                                        .weatherCode, .surfacePressure,
-                                                        .windSpeed, .windDirection]
-        parameters[ParameterKeyPath.hourly] = forecastAttributes.map { $0.rawValue }.joined(separator: ",")
-        parameters[ParameterKeyPath.currentWeather] = String(describing: true)
-        parameters[ParameterKeyPath.forecastDays] = String(describing: 2)
-        parameters[ParameterKeyPath.timeZone] = "Europe/Warsaw"
+        parameters[ParameterKeyPath.currentWeather] = String(describing: params.fetchCurrentWeather)
+        parameters[ParameterKeyPath.forecastDaysNumber] = String(describing: params.forecastDaysNumber)
+
+        parameters[ParameterKeyPath.timeZone] = params.timeZone.identifier
+
+        if let hourlyAttributes = params.hourlyForecastAttributes {
+            parameters[ParameterKeyPath.hourlyForecast] = hourlyAttributes.map { $0.rawValue }.joined(separator: ",")
+        }
     }
 }

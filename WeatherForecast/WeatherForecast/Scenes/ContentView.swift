@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 import Hydra
 
 struct ContentView: View {
@@ -18,7 +19,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            WeatherForecastApiWorker().fetchHourlyWeatherForecast()
+            WeatherForecastApiWorker().fetchHourlyWeatherForecast(for: CLLocationCoordinate2D(latitude: 52.41, longitude: 16.93))
                 .then { weatherData in
                     print("SUCCESS: \(weatherData)")
                 }
