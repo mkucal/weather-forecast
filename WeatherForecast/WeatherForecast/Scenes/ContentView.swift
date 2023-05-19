@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Hydra
 
 struct ContentView: View {
     var body: some View {
@@ -16,6 +17,15 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            WeatherForecastApiWorker().fetchHourlyWeatherForecast()
+                .then { weatherData in
+                    print("SUCCESS: \(weatherData)")
+                }
+                .catch { error in
+                    print("ERROR: \(error)")
+                }
+        }
     }
 }
 

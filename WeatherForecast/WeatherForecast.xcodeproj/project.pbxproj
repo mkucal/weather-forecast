@@ -23,6 +23,8 @@
 		D6EC9B962A16D5FD007A794A /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B952A16D5FD007A794A /* ApiErrors.swift */; };
 		D6EC9B982A16DA57007A794A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B972A16DA57007A794A /* Errors.swift */; };
 		D6EC9B9A2A16DEC4007A794A /* WeatherApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B992A16DEC4007A794A /* WeatherApiData.swift */; };
+		D6EC9B9E2A178338007A794A /* WeatherForecastApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B9D2A178338007A794A /* WeatherForecastApi.swift */; };
+		D6EC9BA02A178D90007A794A /* WeatherForecastApiWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9B9F2A178D90007A794A /* WeatherForecastApiWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		D6EC9B952A16D5FD007A794A /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
 		D6EC9B972A16DA57007A794A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		D6EC9B992A16DEC4007A794A /* WeatherApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiData.swift; sourceTree = "<group>"; };
+		D6EC9B9D2A178338007A794A /* WeatherForecastApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastApi.swift; sourceTree = "<group>"; };
+		D6EC9B9F2A178D90007A794A /* WeatherForecastApiWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastApiWorker.swift; sourceTree = "<group>"; };
 		DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D65E09902A16CB7A00309613 /* ApiWorker.swift */,
+				D6EC9B9F2A178D90007A794A /* WeatherForecastApiWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -169,6 +174,15 @@
 		D65E098F2A16C87200309613 /* Api Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				D6EC9B9B2A1782D1007A794A /* General */,
+				D6EC9B9C2A1782E5007A794A /* Concrete Api */,
+			);
+			path = "Api Infrastructure";
+			sourceTree = "<group>";
+		};
+		D6EC9B9B2A1782D1007A794A /* General */ = {
+			isa = PBXGroup;
+			children = (
 				D65E09922A16CD1400309613 /* ApiProtocols.swift */,
 				D65E09962A16CE4800309613 /* RequestProtocol.swift */,
 				D65E09982A16CE6E00309613 /* ResponseProtocol.swift */,
@@ -177,7 +191,15 @@
 				D65E099C2A16CF4C00309613 /* Request.swift */,
 				D6EC9B952A16D5FD007A794A /* ApiErrors.swift */,
 			);
-			path = "Api Infrastructure";
+			path = General;
+			sourceTree = "<group>";
+		};
+		D6EC9B9C2A1782E5007A794A /* Concrete Api */ = {
+			isa = PBXGroup;
+			children = (
+				D6EC9B9D2A178338007A794A /* WeatherForecastApi.swift */,
+			);
+			path = "Concrete Api";
 			sourceTree = "<group>";
 		};
 		F8336ADD8544B6E7632771A3 /* Frameworks */ = {
@@ -307,9 +329,11 @@
 				D65E09992A16CE6E00309613 /* ResponseProtocol.swift in Sources */,
 				D65E09912A16CB7A00309613 /* ApiWorker.swift in Sources */,
 				D6EC9B982A16DA57007A794A /* Errors.swift in Sources */,
+				D6EC9BA02A178D90007A794A /* WeatherForecastApiWorker.swift in Sources */,
 				D65E09792A16199300309613 /* WeatherForecastApp.swift in Sources */,
 				D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */,
 				D65E09952A16CDB200309613 /* Parameters.swift in Sources */,
+				D6EC9B9E2A178338007A794A /* WeatherForecastApi.swift in Sources */,
 				D65E099D2A16CF4C00309613 /* Request.swift in Sources */,
 				D6EC9B9A2A16DEC4007A794A /* WeatherApiData.swift in Sources */,
 				D65E099B2A16CEBA00309613 /* ResponseDecoder.swift in Sources */,
