@@ -48,7 +48,9 @@ struct CurrentWeatherApiData: Decodable {
         windDirection = try container.decodeIfPresent(Double.self, forKey: .windDirection)
         weatherCode = try container.decodeIfPresent(Int.self, forKey: .weatherCode)
 
-        // TODO: time = try container.decodeIfPresent(Double.self, forKey: .time)
+        if let timeStr = try container.decodeIfPresent(String.self, forKey: .time) {
+            time = ApiDateFormatters.hourlyForecastFormatter.date(from: timeStr)
+        }
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -109,7 +111,11 @@ struct HourlyForecastApiData: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        // TODO: time = try container.decodeIfPresent(String.self, forKey: .time)
+        if let timeStr = try container.decodeIfPresent([String].self, forKey: .time) {
+            time = timeStr.compactMap {
+                ApiDateFormatters.hourlyForecastFormatter.date(from: $0)
+            }
+        }
 
         temperature = try container.decodeIfPresent([Double].self, forKey: .temperature)
         relativeHumidity = try container.decodeIfPresent([Double].self, forKey: .relativeHumidity)
@@ -175,7 +181,11 @@ struct DailyForecastApiData: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        // TODO: time = try container.decodeIfPresent(String.self, forKey: .time)
+        if let timeStr = try container.decodeIfPresent([String].self, forKey: .time) {
+            time = timeStr.compactMap {
+                ApiDateFormatters.dailyForecastFormatter.date(from: $0)
+            }
+        }
 
         weatherCode = try container.decodeIfPresent([Int].self, forKey: .weatherCode)
         temperatureMax = try container.decodeIfPresent([Double].self, forKey: .temperatureMax)
@@ -194,4 +204,19 @@ struct DailyForecastApiData: Decodable {
         case apparentTemperatureMin = "apparent_temperature_min"
         case precipitationSum = "precipitation_sum"
     }
+}
+
+private struct ApiDateFormatters {
+
+    static let hourlyForecastFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        return formatter
+    }()
+
+    static let dailyForecastFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
 }

@@ -19,7 +19,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            WeatherForecastApiWorker().fetchHourlyWeatherForecast(for: CLLocationCoordinate2D(latitude: 52.41, longitude: 16.93))
+            WeatherForecastApiWorker().fetchDailyWeatherForecast(for: CLLocationCoordinate2D(latitude: 52.41, longitude: 16.93))
                 .then { weatherData in
                     print("SUCCESS: \(weatherData)")
                 }
