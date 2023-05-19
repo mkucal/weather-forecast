@@ -33,14 +33,14 @@ struct WeatherForecastService: ApiServiceProtocol {
     var version: String = "v1"
 }
 
-struct Forecast: EndpointProtocol {
+struct WeatherForecast: EndpointProtocol {
     let path: String = "forecast"
 }
 
-struct FetchHourlyForecastQuery: QueryProtocol {
+struct FetchWeatherForecastQuery: QueryProtocol {
     var decoder: ResponseDecoderProtocol? = ResponseDecoder<WeatherApiData>()
     var method: HttpMethod = .get
-    var endpoint: EndpointProtocol = Forecast()
+    var endpoint: EndpointProtocol = WeatherForecast()
     var service: ApiServiceProtocol = WeatherForecastService()
     var parameters: Parameters = Parameters(encoding: .url)
 

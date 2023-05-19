@@ -15,7 +15,7 @@ protocol WeatherForecastApiWorkerProtocol {
 class WeatherForecastApiWorker: WeatherForecastApiWorkerProtocol {
 
     func fetchHourlyWeatherForecast() -> Promise<WeatherApiData> {
-        let query = FetchHourlyForecastQuery()
+        let query = FetchWeatherForecastQuery()
         let request = Request(query: query, session: URLSession.shared)
 
         return Promise { resolved, rejected, _ in
