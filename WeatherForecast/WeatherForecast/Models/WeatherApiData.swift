@@ -87,8 +87,11 @@ struct DailyForecastUnitsApiData: Decodable {
 
     private enum CodingKeys: String, CodingKey {
         case weatherCode = "weathercode"
-
-        // TODO
+        case temperatureMax = "temperature_2m_max"
+        case temperatureMin = "temperature_2m_min"
+        case apparentTemperatureMax = "apparent_temperature_max"
+        case apparentTemperatureMin = "apparent_temperature_min"
+        case precipitationSum = "precipitation_sum"
     }
 }
 
@@ -102,7 +105,10 @@ struct DailyForecastApiData: Decodable {
     private enum CodingKeys: String, CodingKey {
         case time
         case weatherCode = "weathercode"
-
-        // TODO
+        case temperatureMax = "temperature_2m_max"
+        case temperatureMin = "temperature_2m_min"
+        case apparentTemperatureMax = "apparent_temperature_max"
+        case apparentTemperatureMin = "apparent_temperature_min"
+        case precipitationSum = "precipitation_sum"
     }
 }
