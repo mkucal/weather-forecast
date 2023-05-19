@@ -47,6 +47,7 @@ struct CurrentWeatherApiData: Decodable {
         windSpeed = try container.decodeIfPresent(Double.self, forKey: .windSpeed)
         windDirection = try container.decodeIfPresent(Double.self, forKey: .windDirection)
         weatherCode = try container.decodeIfPresent(Int.self, forKey: .weatherCode)
+
         // TODO: time = try container.decodeIfPresent(Double.self, forKey: .time)
     }
 
@@ -95,10 +96,29 @@ struct HourlyForecastUnitsApiData: Decodable {
 }
 
 struct HourlyForecastApiData: Decodable {
+    var time: [Date]?
+    var temperature: [Double]?
+    var relativeHumidity: [Double]?
+    var apparentTemperature: [Double]?
+    var precipitation: [Double]?
+    var weatherCode: [Int]?
+    var surfacePressure: [Double]?
+    var windSpeed: [Double]?
+    var windDirection: [Double]?
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        // TODO: time = try container.decodeIfPresent(String.self, forKey: .time)
+
+        temperature = try container.decodeIfPresent([Double].self, forKey: .temperature)
+        relativeHumidity = try container.decodeIfPresent([Double].self, forKey: .relativeHumidity)
+        apparentTemperature = try container.decodeIfPresent([Double].self, forKey: .apparentTemperature)
+        precipitation = try container.decodeIfPresent([Double].self, forKey: .precipitation)
+        weatherCode = try container.decodeIfPresent([Int].self, forKey: .weatherCode)
+        surfacePressure = try container.decodeIfPresent([Double].self, forKey: .surfacePressure)
+        windSpeed = try container.decodeIfPresent([Double].self, forKey: .windSpeed)
+        windDirection = try container.decodeIfPresent([Double].self, forKey: .windDirection)
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -115,10 +135,22 @@ struct HourlyForecastApiData: Decodable {
 }
 
 struct DailyForecastUnitsApiData: Decodable {
+    var weatherCodeUnit: String?
+    var temperatureMaxUnit: String?
+    var temperatureMinUnit: String?
+    var apparentTemperatureMaxUnit: String?
+    var apparentTemperatureMinUnit: String?
+    var precipitationSumUnit: String?
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        weatherCodeUnit = try container.decodeIfPresent(String.self, forKey: .weatherCode)
+        temperatureMaxUnit = try container.decodeIfPresent(String.self, forKey: .temperatureMax)
+        temperatureMinUnit = try container.decodeIfPresent(String.self, forKey: .temperatureMin)
+        apparentTemperatureMaxUnit = try container.decodeIfPresent(String.self, forKey: .apparentTemperatureMax)
+        apparentTemperatureMinUnit = try container.decodeIfPresent(String.self, forKey: .apparentTemperatureMin)
+        precipitationSumUnit = try container.decodeIfPresent(String.self, forKey: .precipitationSum)
     }
 
     private enum CodingKeys: String, CodingKey {
