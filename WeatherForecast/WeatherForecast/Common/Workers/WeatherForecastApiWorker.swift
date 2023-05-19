@@ -11,6 +11,7 @@ import Hydra
 
 protocol WeatherForecastApiWorkerProtocol {
     func fetchHourlyWeatherForecast(for location: CLLocationCoordinate2D) -> Promise<WeatherApiData>
+    func fetchDailyWeatherForecast(for location: CLLocationCoordinate2D) -> Promise<WeatherApiData>
 }
 
 class WeatherForecastApiWorker: WeatherForecastApiWorkerProtocol {
@@ -20,11 +21,31 @@ class WeatherForecastApiWorker: WeatherForecastApiWorkerProtocol {
                                                              .relativeHumidity, .precipitation,
                                                              .weatherCode, .surfacePressure,
                                                              .windSpeed, .windDirection]
-        let queryParams = FetchWeatherForecastParams(location: location, fetchCurrentWeather: true,
-                                                     forecastDaysNumber: 2, timeZone: TimeZone.current,
+        let queryParams = FetchWeatherForecastParams(location: location, forecastDaysNumber: 2,
+                                                     timeZone: TimeZone.current, fetchCurrentWeather: true,
                                                      hourlyForecastAttributes: hourlyAttributes)
 
         let query = FetchWeatherForecastQuery(params: queryParams)
+        return fetchWeatherForecast(for: query)
+    }
+
+    func fetchDailyWeatherForecast(for location: CLLocationCoordinate2D) -> Promise<WeatherApiData> {
+        let dailyAttributes: [WeatherForecastAttributes] = [.weatherCode, .temperatureMax, .temperatureMin,
+                                                            .apparentTemperatureMax, .apparentTemperatureMin,
+                                                            .precipitationSum]
+
+        let queryParams = FetchWeatherForecastParams(location: location, forecastDaysNumber: 10,
+                                                     timeZone: TimeZone.current,
+                                                     dailyForecastAttributes: dailyAttributes)
+
+        let query = FetchWeatherForecastQuery(params: queryParams)
+        return fetchWeatherForecast(for: query)
+    }
+}
+
+private extension WeatherForecastApiWorker {
+
+    func fetchWeatherForecast(for query: QueryProtocol) -> Promise<WeatherApiData> {
         let request = Request(query: query, session: URLSession.shared)
 
         return Promise { resolved, rejected, _ in
@@ -41,9 +62,5 @@ class WeatherForecastApiWorker: WeatherForecastApiWorkerProtocol {
                 }
             }
         }
-    }
-
-    func fetchDailyWeatherForecast() {
-
     }
 }
