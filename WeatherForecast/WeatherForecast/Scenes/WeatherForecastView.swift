@@ -40,68 +40,19 @@ struct WeatherForecastView: View {
 
             Spacer()
 
-            VStack(spacing: 10) {
-                Text("Poznań")
-                    .font(.title2)
-                Text("20℃")
-                    .font(.system(size: 50))
-                Image(systemName: "cloud")
-                    .font(.title2)
-                Text("Partly cloudly")
-                    .font(.callout)
-            }
-            .padding(.bottom, 10)
+            CurrentWeatherView()
+                .padding(.bottom, 10)
 
             List {
                 Section("Hourly forecast") {
                     HourlyForecastView()
+                        .padding(.vertical, 10)
                 }
 
                 Section("10 day forecast") {
-                    HStack {
-                        Text("Today")
-                            .font(.callout)
-                            .padding(.vertical, 10)
-                            .frame(maxWidth: 100, alignment: .leading)
-                            .background(.white)
-                        Spacer()
-                        Image(systemName: "cloud")
-                            .font(.title2)
-                        Spacer()
-                        Text("8℃ / 20℃")
-                            .frame(maxWidth: 120, alignment: .trailing)
-                            .background(.white)
-                    }
-
-                    HStack {
-                        Text("Sunday")
-                            .font(.callout)
-                            .padding(.vertical, 10)
-                            .frame(maxWidth: 100, alignment: .leading)
-                            .background(.white)
-                        Spacer()
-                        Image(systemName: "cloud")
-                            .font(.title2)
-                        Spacer()
-                        Text("18℃ / 20℃")
-                            .frame(maxWidth: 120, alignment: .trailing)
-                            .background(.white)
-                    }
-
-                    HStack {
-                        Text("Saturday")
-                            .font(.callout)
-                            .padding(.vertical, 10)
-                            .frame(maxWidth: 100, alignment: .leading)
-                            .background(.white)
-                        Spacer()
-                        Image(systemName: "cloud")
-                            .font(.title2)
-                        Spacer()
-                        Text("1℃ / 2℃")
-                            .frame(maxWidth: 120, alignment: .trailing)
-                            .background(.white)
-                    }
+                    DailyForecastItemView()
+                    DailyForecastItemView()
+                    DailyForecastItemView()
                 }
             }
             .background(Color(UIColor.systemGroupedBackground))
@@ -112,6 +63,22 @@ struct WeatherForecastView: View {
 struct WeatherForecastView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherForecastView()
+    }
+}
+
+struct CurrentWeatherView: View {
+
+    var body: some View {
+        VStack(spacing: 10) {
+            Text("Poznań")
+                .font(.title2)
+            Text("20℃")
+                .font(.system(size: 50))
+            Image(systemName: "cloud")
+                .font(.title2)
+            Text("Partly cloudly")
+                .font(.callout)
+        }
     }
 }
 
@@ -164,7 +131,26 @@ struct HourlyForecastView: View {
                 .background(.gray)
                 .cornerRadius(8)
             }
-            .padding(.vertical, 10)
+        }
+    }
+}
+
+struct DailyForecastItemView: View {
+
+    var body: some View {
+        HStack {
+            Text("Today")
+                .font(.callout)
+                .padding(.vertical, 10)
+                .frame(maxWidth: 100, alignment: .leading)
+                .background(.white)
+            Spacer()
+            Image(systemName: "cloud")
+                .font(.title2)
+            Spacer()
+            Text("8℃ / 20℃")
+                .frame(maxWidth: 120, alignment: .trailing)
+                .background(.white)
         }
     }
 }
