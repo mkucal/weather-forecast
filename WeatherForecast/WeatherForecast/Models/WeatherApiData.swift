@@ -55,7 +55,7 @@ struct CurrentWeatherApiData: Decodable {
         weatherCode = try container.decodeIfPresent(Int.self, forKey: .weatherCode)
 
         if let timeStr = try container.decodeIfPresent(String.self, forKey: .time) {
-            time = ApiDateFormatters.hourlyForecastFormatter.date(from: timeStr)
+            time = DateFormatter.Api.hourlyForecast.date(from: timeStr)
         }
     }
 
@@ -119,7 +119,7 @@ struct HourlyForecastApiData: Decodable {
 
         if let timeStr = try container.decodeIfPresent([String].self, forKey: .time) {
             time = timeStr.compactMap {
-                ApiDateFormatters.hourlyForecastFormatter.date(from: $0)
+                DateFormatter.Api.hourlyForecast.date(from: $0)
             }
         }
 
@@ -225,7 +225,7 @@ struct DailyForecastApiData: Decodable {
 
         if let timeStr = try container.decodeIfPresent([String].self, forKey: .time) {
             time = timeStr.compactMap {
-                ApiDateFormatters.dailyForecastFormatter.date(from: $0)
+                DateFormatter.Api.dailyForecast.date(from: $0)
             }
         }
 
@@ -278,19 +278,4 @@ struct CombinedDailyForecastApiData {
             self.data.append(dayDataItem)
         }
     }
-}
-
-private struct ApiDateFormatters {
-
-    static let hourlyForecastFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
-        return formatter
-    }()
-
-    static let dailyForecastFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
 }
