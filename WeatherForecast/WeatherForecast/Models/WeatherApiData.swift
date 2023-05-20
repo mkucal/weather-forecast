@@ -10,7 +10,7 @@ import Foundation
 struct WeatherApiData: Decodable {
     var currentWeather: CurrentWeatherApiData?
     var hourlyForecastUnits: HourlyForecastUnitsApiData?
-    var hourlyForecast: HourlyForecastApiData?
+    var hourlyForecast: CombinedHourlyForecastApiData?
     var dailyForecastUnits: DailyForecastUnitsApiData?
     var dailyForecast: DailyForecastApiData?
 
@@ -19,7 +19,11 @@ struct WeatherApiData: Decodable {
 
         currentWeather = try container.decodeIfPresent(CurrentWeatherApiData.self, forKey: .currentWeather)
         hourlyForecastUnits = try container.decodeIfPresent(HourlyForecastUnitsApiData.self, forKey: .hourlyForecastUnits)
-        hourlyForecast = try container.decodeIfPresent(HourlyForecastApiData.self, forKey: .hourlyForecast)
+
+        if let forecast = try container.decodeIfPresent(HourlyForecastApiData.self, forKey: .hourlyForecast) {
+            hourlyForecast = CombinedHourlyForecastApiData(hourlyData: forecast)
+        }
+
         dailyForecastUnits = try container.decodeIfPresent(DailyForecastUnitsApiData.self, forKey: .dailyForecastUnits)
         dailyForecast = try container.decodeIfPresent(DailyForecastApiData.self, forKey: .dailyForecast)
     }
@@ -137,6 +141,42 @@ struct HourlyForecastApiData: Decodable {
         case surfacePressure = "surface_pressure"
         case windSpeed = "windspeed_10m"
         case windDirection = "winddirection_10m"
+    }
+}
+
+struct SpecifiedHourWeatherData {
+    var time: Date?
+    var temperature: Double?
+    var relativeHumidity: Double?
+    var apparentTemperature: Double?
+    var precipitation: Double?
+    var weatherCode: Int?
+    var surfacePressure: Double?
+    var windSpeed: Double?
+    var windDirection: Double?
+}
+
+struct CombinedHourlyForecastApiData {
+    var data: [SpecifiedHourWeatherData] = []
+
+    init(hourlyData: HourlyForecastApiData) {
+        let count = hourlyData.time?.count ?? 0
+
+        for index in 0..<count {
+            var hourDataItem = SpecifiedHourWeatherData()
+
+            hourDataItem.time = hourlyData.time?[safe: index]
+            hourDataItem.temperature = hourlyData.temperature?[safe: index]
+            hourDataItem.relativeHumidity = hourlyData.relativeHumidity?[safe: index]
+            hourDataItem.apparentTemperature = hourlyData.apparentTemperature?[safe: index]
+            hourDataItem.precipitation = hourlyData.precipitation?[safe: index]
+            hourDataItem.weatherCode = hourlyData.weatherCode?[safe: index]
+            hourDataItem.surfacePressure = hourlyData.surfacePressure?[safe: index]
+            hourDataItem.windSpeed = hourlyData.windSpeed?[safe: index]
+            hourDataItem.windDirection = hourlyData.windDirection?[safe: index]
+
+            self.data.append(hourDataItem)
+        }
     }
 }
 
