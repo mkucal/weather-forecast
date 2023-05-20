@@ -12,20 +12,22 @@ struct WeatherApiData: Decodable {
     var hourlyForecastUnits: HourlyForecastUnitsApiData?
     var hourlyForecast: CombinedHourlyForecastApiData?
     var dailyForecastUnits: DailyForecastUnitsApiData?
-    var dailyForecast: DailyForecastApiData?
+    var dailyForecast: CombinedDailyForecastApiData?
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         currentWeather = try container.decodeIfPresent(CurrentWeatherApiData.self, forKey: .currentWeather)
-        hourlyForecastUnits = try container.decodeIfPresent(HourlyForecastUnitsApiData.self, forKey: .hourlyForecastUnits)
 
+        hourlyForecastUnits = try container.decodeIfPresent(HourlyForecastUnitsApiData.self, forKey: .hourlyForecastUnits)
         if let forecast = try container.decodeIfPresent(HourlyForecastApiData.self, forKey: .hourlyForecast) {
             hourlyForecast = CombinedHourlyForecastApiData(hourlyData: forecast)
         }
 
         dailyForecastUnits = try container.decodeIfPresent(DailyForecastUnitsApiData.self, forKey: .dailyForecastUnits)
-        dailyForecast = try container.decodeIfPresent(DailyForecastApiData.self, forKey: .dailyForecast)
+        if let forecast = try container.decodeIfPresent(DailyForecastApiData.self, forKey: .dailyForecast) {
+            dailyForecast = CombinedDailyForecastApiData(dailyData: forecast)
+        }
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -243,6 +245,38 @@ struct DailyForecastApiData: Decodable {
         case apparentTemperatureMax = "apparent_temperature_max"
         case apparentTemperatureMin = "apparent_temperature_min"
         case precipitationSum = "precipitation_sum"
+    }
+}
+
+struct SpecifiedDayWeatherData {
+    var time: Date?
+    var weatherCode: Int?
+    var temperatureMax: Double?
+    var temperatureMin: Double?
+    var apparentTemperatureMax: Double?
+    var apparentTemperatureMin: Double?
+    var precipitationSum: Double?
+}
+
+struct CombinedDailyForecastApiData {
+    var data: [SpecifiedDayWeatherData] = []
+
+    init(dailyData: DailyForecastApiData) {
+        let count = dailyData.time?.count ?? 0
+
+        for index in 0..<count {
+            var dayDataItem = SpecifiedDayWeatherData()
+
+            dayDataItem.time = dailyData.time?[safe: index]
+            dayDataItem.weatherCode = dailyData.weatherCode?[safe: index]
+            dayDataItem.temperatureMax = dailyData.temperatureMax?[safe: index]
+            dayDataItem.temperatureMin = dailyData.temperatureMin?[safe: index]
+            dayDataItem.apparentTemperatureMax = dailyData.apparentTemperatureMax?[safe: index]
+            dayDataItem.apparentTemperatureMin = dailyData.apparentTemperatureMin?[safe: index]
+            dayDataItem.precipitationSum = dailyData.precipitationSum?[safe: index]
+
+            self.data.append(dayDataItem)
+        }
     }
 }
 
