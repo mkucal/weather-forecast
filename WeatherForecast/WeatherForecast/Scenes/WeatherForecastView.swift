@@ -54,54 +54,7 @@ struct WeatherForecastView: View {
 
             List {
                 Section("Hourly forecast") {
-                    ScrollView(.horizontal) {
-                        HStack {
-                            VStack(spacing: 4) {
-                                Text("00:00")
-                                Image(systemName: "cloud")
-                                    .font(.title2)
-                                Text("20℃")
-                            }
-                            .padding(.vertical, 10)
-                            .frame(width: 90)
-                            .background(.gray)
-                            .cornerRadius(8)
-
-                            VStack(spacing: 4) {
-                                Text("00:00")
-                                Image(systemName: "cloud")
-                                    .font(.title2)
-                                Text("20℃")
-                            }
-                            .padding(.vertical, 10)
-                            .frame(width: 90)
-                            .background(.gray)
-                            .cornerRadius(8)
-
-                            VStack(spacing: 4) {
-                                Text("00:00")
-                                Image(systemName: "cloud")
-                                    .font(.title2)
-                                Text("20℃")
-                            }
-                            .padding(.vertical, 10)
-                            .frame(width: 90)
-                            .background(.gray)
-                            .cornerRadius(8)
-
-                            VStack(spacing: 4) {
-                                Text("00:00")
-                                Image(systemName: "cloud")
-                                    .font(.title2)
-                                Text("20℃")
-                            }
-                            .padding(.vertical, 10)
-                            .frame(width: 90)
-                            .background(.gray)
-                            .cornerRadius(8)
-                        }
-                        .padding(.vertical, 10)
-                    }
+                    HourlyForecastView()
                 }
 
                 Section("10 day forecast") {
@@ -159,5 +112,59 @@ struct WeatherForecastView: View {
 struct WeatherForecastView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherForecastView()
+    }
+}
+
+struct HourlyForecastView: View {
+
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack {
+                VStack(spacing: 4) {
+                    Text("00:00")
+                    Image(systemName: "cloud")
+                        .font(.title2)
+                    Text("20℃")
+                }
+                .padding(.vertical, 10)
+                .frame(width: 90)
+                .background(.gray)
+                .cornerRadius(8)
+
+                VStack(spacing: 4) {
+                    Text("00:00")
+                    Image(systemName: "cloud")
+                        .font(.title2)
+                    Text("20℃")
+                }
+                .padding(.vertical, 10)
+                .frame(width: 90)
+                .background(.gray)
+                .cornerRadius(8)
+
+                VStack(spacing: 4) {
+                    Text("00:00")
+                    Image(systemName: "cloud")
+                        .font(.title2)
+                    Text("20℃")
+                }
+                .padding(.vertical, 10)
+                .frame(width: 90)
+                .background(.gray)
+                .cornerRadius(8)
+
+                VStack(spacing: 4) {
+                    Text("00:00")
+                    Image(systemName: "cloud")
+                        .font(.title2)
+                    Text("20℃")
+                }
+                .padding(.vertical, 10)
+                .frame(width: 90)
+                .background(.gray)
+                .cornerRadius(8)
+            }
+            .padding(.vertical, 10)
+        }
     }
 }
