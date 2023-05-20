@@ -11,3 +11,7 @@ enum GeneralError: Error {
     case general
     case emptySelf
 }
+
+enum GeocodingError: Error {
+    case locationNotFound
+}

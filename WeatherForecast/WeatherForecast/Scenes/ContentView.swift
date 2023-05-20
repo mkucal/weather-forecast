@@ -10,22 +10,19 @@ import CoreLocation
 import Hydra
 
 struct ContentView: View {
+
+    @ObservedObject private var weatherViewModel = WeatherViewModel()
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("\(weatherViewModel.weatherData.debugDescription)")
         }
         .padding()
         .onAppear {
-            WeatherForecastApiWorker().fetchDailyWeatherForecast(for: CLLocationCoordinate2D(latitude: 52.41, longitude: 16.93))
-                .then { weatherData in
-                    print("SUCCESS: \(weatherData)")
-                }
-                .catch { error in
-                    print("ERROR: \(error)")
-                }
+            weatherViewModel.fetchWeatherData(for: "Poznań")
         }
     }
 }
