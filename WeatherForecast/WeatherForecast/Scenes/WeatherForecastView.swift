@@ -15,14 +15,80 @@ struct WeatherForecastView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("\(weatherViewModel.weatherData.debugDescription)")
-        }
-        .padding()
-        .onAppear {
-            weatherViewModel.fetchWeatherData(for: "Poznań")
+            HStack(spacing: 20) {
+                Spacer()
+
+                Button(action: {
+
+                }) {
+                    Image(systemName: "arrow.clockwise.circle")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .padding(.leading, 20)
+                }
+
+                Button(action: {
+
+                }) {
+                    Image(systemName: "gearshape")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .padding(.trailing, 20)
+                }
+            }
+            .padding(.top, 10)
+
+            Spacer()
+
+            VStack(spacing: 10) {
+                Text("Poznań")
+                    .font(.title2)
+                Text("20℃")
+                    .font(.largeTitle)
+                Image(systemName: "cloud")
+                    .font(.title3)
+                Text("Partly cloudly")
+                    .font(.callout)
+            }
+
+            List {
+                Section("Hourly forecast") {
+                    ScrollView(.horizontal) {
+                        HStack {
+                            Text("First Row")
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(8)
+                            Text("Second Row")
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(8)
+                            Text("Third Row")
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(8)
+                            Text("Fourth Row")
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(8)
+                        }
+                        .padding(.all, 8)
+                    }
+                }
+
+                Section("10 day forecast") {
+                    Text("Today")
+                    Text("Sunday")
+                    Text("Today")
+                    Text("Sunday")
+                    Text("Today")
+                    Text("Sunday")
+                    Text("Today")
+                    Text("Sunday")
+                    Text("Today")
+                }
+            }
+            .background(Color(UIColor.systemGroupedBackground))
         }
     }
 }
