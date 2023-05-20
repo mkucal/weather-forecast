@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  WeatherForecastView.swift
 //  WeatherForecast
 //
 //  Created by Michał Kucal on 18/05/2023.
@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 import Hydra
 
-struct ContentView: View {
+struct WeatherForecastView: View {
 
     @ObservedObject private var weatherViewModel = WeatherViewModel()
 
@@ -27,8 +27,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct WeatherForecastView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        WeatherForecastView()
     }
 }
