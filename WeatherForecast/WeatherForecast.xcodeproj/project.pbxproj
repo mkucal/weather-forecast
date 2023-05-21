@@ -27,6 +27,7 @@
 		D6EC9BA22A18ECBD007A794A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA12A18ECBD007A794A /* Array+Utils.swift */; };
 		D6EC9BA42A18F477007A794A /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA32A18F477007A794A /* DateFormatter+Utils.swift */; };
 		D6EC9BA62A18F64D007A794A /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA52A18F64D007A794A /* WeatherViewModel.swift */; };
+		D6EC9BA82A1A5FFC007A794A /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA72A1A5FFC007A794A /* Int+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		D6EC9BA12A18ECBD007A794A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		D6EC9BA32A18F477007A794A /* DateFormatter+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Utils.swift"; sourceTree = "<group>"; };
 		D6EC9BA52A18F64D007A794A /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		D6EC9BA72A1A5FFC007A794A /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 			children = (
 				D6EC9BA12A18ECBD007A794A /* Array+Utils.swift */,
 				D6EC9BA32A18F477007A794A /* DateFormatter+Utils.swift */,
+				D6EC9BA72A1A5FFC007A794A /* Int+Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */,
 				D65E09952A16CDB200309613 /* Parameters.swift in Sources */,
 				D6EC9B9E2A178338007A794A /* WeatherForecastApi.swift in Sources */,
+				D6EC9BA82A1A5FFC007A794A /* Int+Utils.swift in Sources */,
 				D6EC9BA62A18F64D007A794A /* WeatherViewModel.swift in Sources */,
 				D65E099D2A16CF4C00309613 /* Request.swift in Sources */,
 				D6EC9B9A2A16DEC4007A794A /* WeatherApiData.swift in Sources */,

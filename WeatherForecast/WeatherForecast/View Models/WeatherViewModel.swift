@@ -117,8 +117,12 @@ struct CurrentWeatherViewModel {
 
         // TODO:
         temperature = "20℃"
-        weatherStateIconName = "cloud"
-        weatherStateDesc = "Partly cloudly"
+
+        guard let weatherCode = hourlyApiData.currentWeather?.weatherCode else {
+            return
+        }
+        weatherStateIconName = weatherCode.weatherStateIconName
+        weatherStateDesc = weatherCode.weatherStateDescription
     }
 }
 
