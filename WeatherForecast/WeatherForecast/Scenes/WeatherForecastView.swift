@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreLocation
 import Hydra
 
 struct WeatherForecastView: View {
@@ -43,19 +42,8 @@ struct WeatherForecastView: View {
             CurrentWeatherView()
                 .padding(.bottom, 10)
 
-            List {
-                Section("Hourly forecast") {
-                    HourlyForecastView()
-                        .padding(.vertical, 10)
-                }
-
-                Section("10 day forecast") {
-                    DailyForecastItemView()
-                    DailyForecastItemView()
-                    DailyForecastItemView()
-                }
-            }
-            .background(Color(UIColor.systemGroupedBackground))
+            DailyForecastView()
+                .background(Color(UIColor.systemGroupedBackground))
         }
     }
 }
@@ -87,49 +75,45 @@ struct HourlyForecastView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                VStack(spacing: 4) {
-                    Text("00:00")
-                    Image(systemName: "cloud")
-                        .font(.title2)
-                    Text("20℃")
-                }
-                .padding(.vertical, 10)
-                .frame(width: 90)
-                .background(.gray)
-                .cornerRadius(8)
+                HourlyForecastItemView()
+                HourlyForecastItemView()
+                HourlyForecastItemView()
+                HourlyForecastItemView()
+                HourlyForecastItemView()
+            }
+        }
+    }
+}
 
-                VStack(spacing: 4) {
-                    Text("00:00")
-                    Image(systemName: "cloud")
-                        .font(.title2)
-                    Text("20℃")
-                }
-                .padding(.vertical, 10)
-                .frame(width: 90)
-                .background(.gray)
-                .cornerRadius(8)
+struct HourlyForecastItemView: View {
 
-                VStack(spacing: 4) {
-                    Text("00:00")
-                    Image(systemName: "cloud")
-                        .font(.title2)
-                    Text("20℃")
-                }
-                .padding(.vertical, 10)
-                .frame(width: 90)
-                .background(.gray)
-                .cornerRadius(8)
+    var body: some View {
+        VStack(spacing: 4) {
+            Text("00:00")
+            Image(systemName: "cloud")
+                .font(.title2)
+            Text("20℃")
+        }
+        .padding(.vertical, 10)
+        .frame(width: 90)
+        .background(.gray)
+        .cornerRadius(8)
+    }
+}
 
-                VStack(spacing: 4) {
-                    Text("00:00")
-                    Image(systemName: "cloud")
-                        .font(.title2)
-                    Text("20℃")
-                }
-                .padding(.vertical, 10)
-                .frame(width: 90)
-                .background(.gray)
-                .cornerRadius(8)
+struct DailyForecastView: View {
+
+    var body: some View {
+        List {
+            Section("Hourly forecast") {
+                HourlyForecastView()
+                    .padding(.vertical, 10)
+            }
+
+            Section("10 day forecast") {
+                DailyForecastItemView()
+                DailyForecastItemView()
+                DailyForecastItemView()
             }
         }
     }
