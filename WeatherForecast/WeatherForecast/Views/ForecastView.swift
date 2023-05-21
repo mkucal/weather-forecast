@@ -13,7 +13,7 @@ struct ForecastView: View {
 
     var body: some View {
         List {
-            Section("Hourly forecast") {
+            Section(NSLocalizedString("Hourly forecast", comment: "")) {
                 HourlyForecastView(forecastViewModel: forecastViewModel?.hourlyForecast)
                     .padding(.vertical, 10)
             }

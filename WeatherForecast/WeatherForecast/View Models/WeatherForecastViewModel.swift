@@ -99,7 +99,7 @@ struct DailyForecastViewModel {
             var viewModel = SpecifiedDayForecastViewModel()
 
             let time = $0.time ?? Date()
-            viewModel.date = Calendar.current.isDateInToday(time) ? "Today"
+            viewModel.date = Calendar.current.isDateInToday(time) ? NSLocalizedString("Today", comment: "")
             : DateFormatter.WeatherForecast.dailyForecast.string(from: time)
 
             var tempValue = String(describing: $0.temperatureMin ?? 0.0)

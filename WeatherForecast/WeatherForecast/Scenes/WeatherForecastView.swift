@@ -52,13 +52,13 @@ struct WeatherForecastView: View {
                             .frame(width: 40, height: 40)
                             .padding(.trailing, 20)
                     }
-                    .alert("Enter city", isPresented: $enterCityAlertVisible) {
+                    .alert(NSLocalizedString("Enter city", comment: ""), isPresented: $enterCityAlertVisible) {
                         TextField("", text: $weatherViewModel.address)
 
-                        Button("OK", action: {
+                        Button(NSLocalizedString("OK", comment: ""), action: {
                             fetchWeatherData()
                         })
-                        Button("Cancel", role: .cancel) {}
+                        Button(NSLocalizedString("Cancel", comment: ""), role: .cancel) {}
                     } message: {}
                 }
                 .padding(.top, 10)
@@ -72,11 +72,11 @@ struct WeatherForecastView: View {
 
                     ForecastView(forecastViewModel: viewModel)
                 } else {
-                    Text("No weather forecast available")
+                    Text(NSLocalizedString("No weather forecast available", comment: ""))
                 }
             }
-            .alert("Error", isPresented: .constant(weatherViewModel.fetchedWithError)) {
-                Button("OK", action: {
+            .alert(NSLocalizedString("Error", comment: ""), isPresented: .constant(weatherViewModel.fetchedWithError)) {
+                Button(NSLocalizedString("OK", comment: ""), action: {
                     weatherViewModel.clearError()
                 })
             } message: {
