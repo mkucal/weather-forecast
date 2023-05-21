@@ -122,8 +122,9 @@ struct ForecastView: View {
                     .padding(.vertical, 10)
             }
 
-            Section("10 day forecast") {
-                let data = forecastViewModel?.dailyForecast?.data ?? []
+            let data = forecastViewModel?.dailyForecast?.data ?? []
+            
+            Section("\(data.count) day forecast") {
                 ForEach(0..<data.count, id: \.self) { index in
                     DailyForecastItemView(forecastViewModel: data[index])
                 }
