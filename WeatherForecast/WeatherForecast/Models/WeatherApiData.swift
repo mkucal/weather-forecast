@@ -146,7 +146,7 @@ struct HourlyForecastApiData: Decodable {
     }
 }
 
-struct SpecifiedHourWeatherData {
+struct SpecifiedHourWeatherApiData {
     var time: Date?
     var temperature: Double?
     var relativeHumidity: Double?
@@ -159,13 +159,13 @@ struct SpecifiedHourWeatherData {
 }
 
 struct CombinedHourlyForecastApiData {
-    var data: [SpecifiedHourWeatherData] = []
+    var data: [SpecifiedHourWeatherApiData] = []
 
     init(hourlyData: HourlyForecastApiData) {
         let count = hourlyData.time?.count ?? 0
 
         for index in 0..<count {
-            var hourDataItem = SpecifiedHourWeatherData()
+            var hourDataItem = SpecifiedHourWeatherApiData()
 
             hourDataItem.time = hourlyData.time?[safe: index]
             hourDataItem.temperature = hourlyData.temperature?[safe: index]
@@ -248,7 +248,7 @@ struct DailyForecastApiData: Decodable {
     }
 }
 
-struct SpecifiedDayWeatherData {
+struct SpecifiedDayWeatherApiData {
     var time: Date?
     var weatherCode: Int?
     var temperatureMax: Double?
@@ -259,13 +259,13 @@ struct SpecifiedDayWeatherData {
 }
 
 struct CombinedDailyForecastApiData {
-    var data: [SpecifiedDayWeatherData] = []
+    var data: [SpecifiedDayWeatherApiData] = []
 
     init(dailyData: DailyForecastApiData) {
         let count = dailyData.time?.count ?? 0
 
         for index in 0..<count {
-            var dayDataItem = SpecifiedDayWeatherData()
+            var dayDataItem = SpecifiedDayWeatherApiData()
 
             dayDataItem.time = dailyData.time?[safe: index]
             dayDataItem.weatherCode = dailyData.weatherCode?[safe: index]

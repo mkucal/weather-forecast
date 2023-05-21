@@ -115,17 +115,35 @@ struct CurrentWeatherViewModel {
             return nil
         }
 
+        // TODO:
+        temperature = "20℃"
+        weatherStateIconName = "cloud"
+        weatherStateDesc = "Partly cloudly"
     }
 }
 
+struct SpecifiedHourForecastViewModel {
+    var time: String?
+    var temperature: String?
+    var weatherStateIconName: String?
+}
+
 struct HourlyForecastViewModel {
-    // time, icon, temperature
+    var data: [SpecifiedHourForecastViewModel] = []
 
     init?(hourlyApiData: WeatherApiData?) {
         guard let hourlyApiData = hourlyApiData else {
             return nil
         }
 
+        data = hourlyApiData.hourlyForecast?.data.map { _ in
+            // TODO:
+            var viewModel = SpecifiedHourForecastViewModel()
+            viewModel.time = "00:00"
+            viewModel.temperature = "20℃"
+            viewModel.weatherStateIconName = "cloud"
+            return viewModel
+        } ?? []
     }
 }
 

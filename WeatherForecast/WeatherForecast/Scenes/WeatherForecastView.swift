@@ -54,7 +54,7 @@ struct WeatherForecastView: View {
                 CurrentWeatherView(address: viewModel.address, weatherViewModel: viewModel.currentWeather)
                     .padding(.bottom, 10)
 
-                ForecastView()
+                ForecastView(forecastViewModel: viewModel)
                     .background(Color(UIColor.systemGroupedBackground))
             } else {
                 Text("No weather forecast available")
@@ -85,11 +85,11 @@ struct CurrentWeatherView: View {
         VStack(spacing: 10) {
             Text(address)
                 .font(.title2)
-            Text("20℃")
+            Text(weatherViewModel?.temperature ?? "")
                 .font(.system(size: 50))
-            Image(systemName: "cloud")
+            Image(systemName: weatherViewModel?.weatherStateIconName ?? "")
                 .font(.title2)
-            Text("Partly cloudly")
+            Text(weatherViewModel?.weatherStateDesc ?? "")
                 .font(.callout)
         }
     }
@@ -97,10 +97,12 @@ struct CurrentWeatherView: View {
 
 struct ForecastView: View {
 
+    let forecastViewModel: WeatherForecastViewModel?
+
     var body: some View {
         List {
             Section("Hourly forecast") {
-                HourlyForecastView()
+                HourlyForecastView(forecastViewModel: forecastViewModel?.hourlyForecast)
                     .padding(.vertical, 10)
             }
 
@@ -115,14 +117,15 @@ struct ForecastView: View {
 
 struct HourlyForecastView: View {
 
+    let forecastViewModel: HourlyForecastViewModel?
+
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                HourlyForecastItemView()
-                HourlyForecastItemView()
-                HourlyForecastItemView()
-                HourlyForecastItemView()
-                HourlyForecastItemView()
+                let data = forecastViewModel?.data ?? []
+                ForEach(0..<data.count, id: \.self) { index in
+                    HourlyForecastItemView(forecastViewModel: data[index])
+                }
             }
         }
     }
@@ -130,12 +133,14 @@ struct HourlyForecastView: View {
 
 struct HourlyForecastItemView: View {
 
+    let forecastViewModel: SpecifiedHourForecastViewModel?
+
     var body: some View {
         VStack(spacing: 4) {
-            Text("00:00")
-            Image(systemName: "cloud")
+            Text(forecastViewModel?.time ?? "")
+            Image(systemName: forecastViewModel?.weatherStateIconName ?? "")
                 .font(.title2)
-            Text("20℃")
+            Text(forecastViewModel?.temperature ?? "")
         }
         .padding(.vertical, 10)
         .frame(width: 90)
