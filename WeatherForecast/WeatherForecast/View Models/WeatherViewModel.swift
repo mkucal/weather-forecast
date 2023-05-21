@@ -118,11 +118,11 @@ struct CurrentWeatherViewModel {
         // TODO:
         temperature = "20℃"
 
-        guard let weatherCode = hourlyApiData.currentWeather?.weatherCode else {
+        guard let weatherState = hourlyApiData.currentWeather?.weatherCode?.weatherStateData else {
             return
         }
-        weatherStateIconName = weatherCode.weatherStateIconName
-        weatherStateDesc = weatherCode.weatherStateDescription
+        weatherStateIconName = weatherState.iconName
+        weatherStateDesc = weatherState.description
     }
 }
 
