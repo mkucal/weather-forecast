@@ -115,8 +115,10 @@ struct CurrentWeatherViewModel {
             return nil
         }
 
-        // TODO:
-        temperature = "20℃"
+        let tempValue = String(describing: hourlyApiData.currentWeather?.temperature ?? 0.0)
+        let tempUnit = hourlyApiData.hourlyForecastUnits?.temperatureUnit ?? ""
+
+        temperature = tempValue + tempUnit
 
         guard let weatherState = hourlyApiData.currentWeather?.weatherCode?.weatherStateData else {
             return
