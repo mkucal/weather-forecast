@@ -15,7 +15,11 @@ struct WeatherForecastView: View {
     @State private var enterCityAlertVisible = false
 
     private var showActivityIndicator: Bool {
-        weatherViewModel.fetchingState == .running
+        weatherViewModel.isFetchingRunning
+    }
+
+    private var weatherForecastViewModel: WeatherForecastViewModel? {
+        weatherViewModel.weatherForecastViewModel
     }
 
     var body: some View {
@@ -23,10 +27,9 @@ struct WeatherForecastView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        if let weatherForecastViewModel = weatherViewModel.weatherForecastViewModel {
-                            weatherViewModel.address = weatherForecastViewModel.address
-                            print("Fetching weather forecast for: \(weatherViewModel.address)")
-                            weatherViewModel.fetchWeatherData()
+                        if let viewModel = weatherForecastViewModel {
+                            weatherViewModel.address = viewModel.address
+                            fetchWeatherData()
                         }
                     }) {
                         Image(systemName: "arrow.clockwise.circle")
@@ -50,7 +53,7 @@ struct WeatherForecastView: View {
 
                         Button("OK", action: {
                             print("Fetching weather forecast for: \(weatherViewModel.address)")
-                            weatherViewModel.fetchWeatherData()
+                            fetchWeatherData()
                         })
                         Button("Cancel", role: .cancel) {}
                     } message: {}
@@ -60,7 +63,7 @@ struct WeatherForecastView: View {
 
                 Spacer()
 
-                if let viewModel = weatherViewModel.weatherForecastViewModel {
+                if let viewModel = weatherForecastViewModel {
                     CurrentWeatherView(address: viewModel.address, weatherViewModel: viewModel.currentWeather)
                         .padding(.bottom, 10)
 
@@ -69,9 +72,9 @@ struct WeatherForecastView: View {
                     Text("No weather forecast available")
                 }
             }
-            .alert("Error", isPresented: .constant(weatherViewModel.fetchingError != nil)) {
+            .alert("Error", isPresented: .constant(weatherViewModel.fetchedWithError)) {
                 Button("OK", action: {
-                    weatherViewModel.fetchingError = nil
+                    weatherViewModel.clearError()
                 })
             } message: {
                 Text("Fetching weather forecast for \(weatherViewModel.address) failed")
@@ -89,5 +92,13 @@ struct WeatherForecastView: View {
 struct WeatherForecastView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherForecastView()
+    }
+}
+
+private extension WeatherForecastView {
+
+    func fetchWeatherData() {
+        print("Fetching weather forecast for: \(weatherViewModel.address)")
+        weatherViewModel.fetchWeatherData()
     }
 }

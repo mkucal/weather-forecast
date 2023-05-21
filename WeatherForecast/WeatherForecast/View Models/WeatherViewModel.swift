@@ -22,11 +22,23 @@ class WeatherViewModel: ObservableObject {
     @Published var weatherForecastViewModel: WeatherForecastViewModel?
     @Published var fetchingError: Error?
 
+    var isFetchingRunning: Bool {
+        fetchingState == .running
+    }
+
+    var fetchedWithError: Bool {
+        fetchingError != nil
+    }
+
     private let geocoder = CLGeocoder()
     private let apiWorker: WeatherForecastApiWorkerProtocol = WeatherForecastApiWorker()
 
     func fetchWeatherData() {
         fetchWeatherData(for: address)
+    }
+
+    func clearError() {
+        fetchingError = nil
     }
 }
 
