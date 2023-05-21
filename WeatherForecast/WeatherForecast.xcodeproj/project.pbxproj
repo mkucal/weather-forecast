@@ -12,7 +12,6 @@
 		D65E097B2A16199300309613 /* WeatherForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E097A2A16199300309613 /* WeatherForecastView.swift */; };
 		D65E097D2A16199600309613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D65E097C2A16199600309613 /* Assets.xcassets */; };
 		D65E09802A16199600309613 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D65E097F2A16199600309613 /* Preview Assets.xcassets */; };
-		D65E098E2A161B8000309613 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E098D2A161B8000309613 /* AppTheme.swift */; };
 		D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09922A16CD1400309613 /* ApiProtocols.swift */; };
 		D65E09952A16CDB200309613 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09942A16CDB200309613 /* Parameters.swift */; };
 		D65E09972A16CE4800309613 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E09962A16CE4800309613 /* RequestProtocol.swift */; };
@@ -45,7 +44,6 @@
 		D65E097A2A16199300309613 /* WeatherForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastView.swift; sourceTree = "<group>"; };
 		D65E097C2A16199600309613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D65E097F2A16199600309613 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D65E098D2A161B8000309613 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		D65E09922A16CD1400309613 /* ApiProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProtocols.swift; sourceTree = "<group>"; };
 		D65E09942A16CDB200309613 /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		D65E09962A16CE4800309613 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 		D65E09862A161AAC00309613 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D65E098D2A161B8000309613 /* AppTheme.swift */,
 				D6EC9B972A16DA57007A794A /* Errors.swift */,
 				D65E098F2A16C87200309613 /* Api Infrastructure */,
 				D65E09892A161AF000309613 /* Workers */,
@@ -354,7 +351,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D65E098E2A161B8000309613 /* AppTheme.swift in Sources */,
 				D6EC9BB02A1ABC1E007A794A /* HourlyForecastItemView.swift in Sources */,
 				D65E097B2A16199300309613 /* WeatherForecastView.swift in Sources */,
 				D6EC9BB42A1ABC79007A794A /* ActivityIndicatorView.swift in Sources */,
