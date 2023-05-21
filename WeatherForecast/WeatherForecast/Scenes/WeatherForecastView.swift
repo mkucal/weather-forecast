@@ -50,11 +50,20 @@ struct WeatherForecastView: View {
 
             Spacer()
 
-            CurrentWeatherView()
-                .padding(.bottom, 10)
+            if let weatherData = weatherViewModel.weatherData {
+                CurrentWeatherView()
+                    .padding(.bottom, 10)
 
-            DailyForecastView()
-                .background(Color(UIColor.systemGroupedBackground))
+                DailyForecastView()
+                    .background(Color(UIColor.systemGroupedBackground))
+            } else {
+                Text("No weather forecast available")
+            }
+        }
+        .alert("Error", isPresented: .constant(weatherViewModel.fetchingError != nil)) {
+
+        } message: {
+            Text("Fetching weather forecast for \(weatherViewModel.address) failed")
         }
     }
 }

@@ -91,9 +91,11 @@ private extension WeatherViewModel {
             return weatherData
         }
         .then { [weak self] weatherData in
+            print("Fetching weather forecast: success")
             self?.weatherData = weatherData
         }
         .catch { [weak self] error in
+            print("Fetching weather forecast: failure (\(error)")
             self?.fetchingError = error
         }
         .always(in: .main) { [weak self] in
