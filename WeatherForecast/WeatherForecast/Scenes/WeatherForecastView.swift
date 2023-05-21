@@ -14,58 +14,70 @@ struct WeatherForecastView: View {
 
     @State private var enterCityAlertVisible = false
 
-    var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
+    private var showActivityIndicator: Bool {
+        weatherViewModel.fetchingState == .running
+    }
 
-                }) {
-                    Image(systemName: "arrow.clockwise.circle")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .padding(.leading, 20)
+    var body: some View {
+        ZStack {
+            VStack {
+                HStack {
+                    Button(action: {
+
+                    }) {
+                        Image(systemName: "arrow.clockwise.circle")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .padding(.leading, 20)
+                    }
+
+                    Spacer()
+
+                    Button(action: {
+                        enterCityAlertVisible.toggle()
+                    }) {
+                        Image(systemName: "gearshape")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .padding(.trailing, 20)
+                    }
+                    .alert("Enter city", isPresented: $enterCityAlertVisible) {
+                        TextField("", text: $weatherViewModel.address)
+
+                        Button("OK", action: {
+                            print("Fetching weather forecast for: \(weatherViewModel.address)")
+                            weatherViewModel.fetchWeatherData()
+                        })
+                        Button("Cancel", role: .cancel) {}
+                    } message: {}
                 }
+                .padding(.top, 10)
 
                 Spacer()
 
-                Button(action: {
-                    enterCityAlertVisible.toggle()
-                }) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .padding(.trailing, 20)
+                if let viewModel = weatherViewModel.weatherForecastViewModel {
+                    CurrentWeatherView(address: viewModel.address, weatherViewModel: viewModel.currentWeather)
+                        .padding(.bottom, 10)
+
+                    ForecastView(forecastViewModel: viewModel)
+                        .background(Color(UIColor.systemGroupedBackground))
+                } else {
+                    Text("No weather forecast available")
                 }
-                .alert("Enter city", isPresented: $enterCityAlertVisible) {
-                    TextField("", text: $weatherViewModel.address)
-
-                    Button("OK", action: {
-                        print("Fetching weather forecast for: \(weatherViewModel.address)")
-                        weatherViewModel.fetchWeatherData()
-                    })
-                    Button("Cancel", role: .cancel) {}
-                } message: {}
             }
-            .padding(.top, 10)
-
-            Spacer()
-
-            if let viewModel = weatherViewModel.weatherForecastViewModel {
-                CurrentWeatherView(address: viewModel.address, weatherViewModel: viewModel.currentWeather)
-                    .padding(.bottom, 10)
-
-                ForecastView(forecastViewModel: viewModel)
-                    .background(Color(UIColor.systemGroupedBackground))
-            } else {
-                Text("No weather forecast available")
+            .alert("Error", isPresented: .constant(weatherViewModel.fetchingError != nil)) {
+                Button("OK", action: {
+                    weatherViewModel.fetchingError = nil
+                })
+            } message: {
+                Text("Fetching weather forecast for \(weatherViewModel.address) failed")
             }
-        }
-        .alert("Error", isPresented: .constant(weatherViewModel.fetchingError != nil)) {
-            Button("OK", action: {
-                weatherViewModel.fetchingError = nil
-            })
-        } message: {
-            Text("Fetching weather forecast for \(weatherViewModel.address) failed")
+            .disabled(showActivityIndicator)
+            .blur(radius: showActivityIndicator ? 2 : 0)
+
+            if showActivityIndicator {
+                ActivityIndicatorView()
+            }
         }
     }
 }
@@ -166,10 +178,22 @@ struct DailyForecastItemView: View {
                 .font(.title2)
             Spacer()
 
-            let temperatureStr = (forecastViewModel?.temperatureMin ?? "") + " / " + (forecastViewModel?.temperatureMax ?? "")
+            let temperatureStr = (forecastViewModel?.temperatureMin ?? "")
+            + " / " + (forecastViewModel?.temperatureMax ?? "")
             Text(temperatureStr)
                 .frame(maxWidth: 120, alignment: .trailing)
                 .background(.white)
         }
+    }
+}
+
+struct ActivityIndicatorView: View {
+
+    var body: some View {
+        ProgressView()
+            .progressViewStyle(.circular)
+            .frame(width: 120, height: 120)
+            .background(.gray)
+            .cornerRadius(8)
     }
 }
