@@ -14,22 +14,12 @@ enum WeatherDataFetchingState {
     case running
 }
 
-struct WeatherData {
-    let address: String
-
-    var currentWeather: CurrentWeatherApiData?
-    var hourlyForecastUnits: HourlyForecastUnitsApiData?
-    var hourlyForecast: CombinedHourlyForecastApiData?
-    var dailyForecastUnits: DailyForecastUnitsApiData?
-    var dailyForecast: CombinedDailyForecastApiData?
-}
-
 class WeatherViewModel: ObservableObject {
 
     var address: String = ""
 
     @Published var fetchingState: WeatherDataFetchingState = .idle
-    @Published var weatherData: WeatherData?
+    @Published var weatherForecastViewModel: WeatherForecastViewModel?
     @Published var fetchingError: Error?
 
     private let geocoder = CLGeocoder()
@@ -73,7 +63,7 @@ private extension WeatherViewModel {
         fetchingError = nil
         fetchingState = .running
 
-        async { [weak self] _ -> WeatherData in
+        async { [weak self] _ -> WeatherForecastViewModel in
             guard let self = self else {
                 throw GeneralError.emptySelf
             }
@@ -82,17 +72,12 @@ private extension WeatherViewModel {
             let hourlyWeatherData = try Hydra.await(self.apiWorker.fetchHourlyWeatherForecast(for: location))
             let dailyWeatherData = try Hydra.await(self.apiWorker.fetchDailyWeatherForecast(for: location))
 
-            let weatherData = WeatherData(address: address,
-                                          currentWeather: hourlyWeatherData.currentWeather,
-                                          hourlyForecastUnits: hourlyWeatherData.hourlyForecastUnits,
-                                          hourlyForecast: hourlyWeatherData.hourlyForecast,
-                                          dailyForecastUnits: dailyWeatherData.dailyForecastUnits,
-                                          dailyForecast: dailyWeatherData.dailyForecast)
-            return weatherData
+            return WeatherForecastViewModel(address: address, hourlyApiData: hourlyWeatherData,
+                                            dailyApiData: dailyWeatherData)
         }
-        .then { [weak self] weatherData in
+        .then { [weak self] weatherForecastViewModel in
             print("Fetching weather forecast: success")
-            self?.weatherData = weatherData
+            self?.weatherForecastViewModel = weatherForecastViewModel
         }
         .catch { [weak self] error in
             print("Fetching weather forecast: failure (\(error)")
@@ -101,5 +86,56 @@ private extension WeatherViewModel {
         .always(in: .main) { [weak self] in
             self?.fetchingState = .idle
         }
+    }
+}
+
+struct WeatherForecastViewModel {
+    let address: String
+
+    var currentWeather: CurrentWeatherViewModel?
+    var hourlyForecast: HourlyForecastViewModel?
+    var dailyForecast: DailyForecastViewModel?
+
+    init(address: String, hourlyApiData: WeatherApiData?, dailyApiData: WeatherApiData?) {
+        self.address = address
+
+        currentWeather = CurrentWeatherViewModel(hourlyApiData: hourlyApiData)
+        hourlyForecast = HourlyForecastViewModel(hourlyApiData: hourlyApiData)
+        dailyForecast = DailyForecastViewModel(dailyApiData: dailyApiData)
+    }
+}
+
+struct CurrentWeatherViewModel {
+    var temperature: String?
+    var weatherStateIconName: String?
+    var weatherStateDesc: String?
+
+    init?(hourlyApiData: WeatherApiData?) {
+        guard let hourlyApiData = hourlyApiData else {
+            return nil
+        }
+
+    }
+}
+
+struct HourlyForecastViewModel {
+    // time, icon, temperature
+
+    init?(hourlyApiData: WeatherApiData?) {
+        guard let hourlyApiData = hourlyApiData else {
+            return nil
+        }
+
+    }
+}
+
+struct DailyForecastViewModel {
+    // date, icon, temperature max and min
+
+    init?(dailyApiData: WeatherApiData?) {
+        guard let dailyApiData = dailyApiData else {
+            return nil
+        }
+
     }
 }

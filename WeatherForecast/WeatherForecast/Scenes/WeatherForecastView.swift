@@ -50,18 +50,20 @@ struct WeatherForecastView: View {
 
             Spacer()
 
-            if let weatherData = weatherViewModel.weatherData {
-                CurrentWeatherView()
+            if let viewModel = weatherViewModel.weatherForecastViewModel {
+                CurrentWeatherView(address: viewModel.address, weatherViewModel: viewModel.currentWeather)
                     .padding(.bottom, 10)
 
-                DailyForecastView()
+                ForecastView()
                     .background(Color(UIColor.systemGroupedBackground))
             } else {
                 Text("No weather forecast available")
             }
         }
         .alert("Error", isPresented: .constant(weatherViewModel.fetchingError != nil)) {
-
+            Button("OK", action: {
+                weatherViewModel.fetchingError = nil
+            })
         } message: {
             Text("Fetching weather forecast for \(weatherViewModel.address) failed")
         }
@@ -76,9 +78,12 @@ struct WeatherForecastView_Previews: PreviewProvider {
 
 struct CurrentWeatherView: View {
 
+    let address: String
+    let weatherViewModel: CurrentWeatherViewModel?
+
     var body: some View {
         VStack(spacing: 10) {
-            Text("Poznań")
+            Text(address)
                 .font(.title2)
             Text("20℃")
                 .font(.system(size: 50))
@@ -86,6 +91,24 @@ struct CurrentWeatherView: View {
                 .font(.title2)
             Text("Partly cloudly")
                 .font(.callout)
+        }
+    }
+}
+
+struct ForecastView: View {
+
+    var body: some View {
+        List {
+            Section("Hourly forecast") {
+                HourlyForecastView()
+                    .padding(.vertical, 10)
+            }
+
+            Section("10 day forecast") {
+                DailyForecastItemView()
+                DailyForecastItemView()
+                DailyForecastItemView()
+            }
         }
     }
 }
@@ -118,24 +141,6 @@ struct HourlyForecastItemView: View {
         .frame(width: 90)
         .background(.gray)
         .cornerRadius(8)
-    }
-}
-
-struct DailyForecastView: View {
-
-    var body: some View {
-        List {
-            Section("Hourly forecast") {
-                HourlyForecastView()
-                    .padding(.vertical, 10)
-            }
-
-            Section("10 day forecast") {
-                DailyForecastItemView()
-                DailyForecastItemView()
-                DailyForecastItemView()
-            }
-        }
     }
 }
 
