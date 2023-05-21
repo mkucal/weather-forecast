@@ -142,12 +142,16 @@ struct HourlyForecastViewModel {
             return nil
         }
 
-        data = hourlyApiData.hourlyForecast?.data.map { _ in
+        data = hourlyApiData.hourlyForecast?.data.map {
             // TODO:
             var viewModel = SpecifiedHourForecastViewModel()
             viewModel.time = "00:00"
-            viewModel.temperature = "20℃"
-            viewModel.weatherStateIconName = "cloud"
+
+            let tempValue = String(describing: $0.temperature ?? 0.0)
+            let tempUnit = hourlyApiData.hourlyForecastUnits?.temperatureUnit ?? ""
+
+            viewModel.temperature = tempValue + tempUnit
+            viewModel.weatherStateIconName = $0.weatherCode?.weatherStateData?.iconName
             return viewModel
         } ?? []
     }
@@ -168,13 +172,19 @@ struct DailyForecastViewModel {
             return nil
         }
 
-        data = dailyApiData.dailyForecast?.data.map { _ in
+        data = dailyApiData.dailyForecast?.data.map {
             // TODO:
             var viewModel = SpecifiedDayForecastViewModel()
             viewModel.date = "Today"
-            viewModel.temperatureMin = "8℃"
-            viewModel.temperatureMax = "20℃"
-            viewModel.weatherStateIconName = "cloud"
+
+            var tempValue = String(describing: $0.temperatureMin ?? 0.0)
+            var tempUnit = dailyApiData.dailyForecastUnits?.temperatureMinUnit ?? ""
+            viewModel.temperatureMin = tempValue + tempUnit
+
+            tempValue = String(describing: $0.temperatureMax ?? 0.0)
+            tempUnit = dailyApiData.dailyForecastUnits?.temperatureMaxUnit ?? ""
+            viewModel.temperatureMax = tempValue + tempUnit
+            viewModel.weatherStateIconName = $0.weatherCode?.weatherStateData?.iconName
             return viewModel
         } ?? []
     }
