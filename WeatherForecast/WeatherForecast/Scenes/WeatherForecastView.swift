@@ -26,6 +26,8 @@ struct WeatherForecastView: View {
         ZStack {
             VStack {
                 HStack {
+                    // Refresh button
+
                     Button(action: {
                         if let viewModel = weatherForecastViewModel {
                             weatherViewModel.address = viewModel.address
@@ -40,6 +42,8 @@ struct WeatherForecastView: View {
 
                     Spacer()
 
+                    // Configure city button
+
                     Button(action: {
                         enterCityAlertVisible.toggle()
                     }) {
@@ -52,7 +56,6 @@ struct WeatherForecastView: View {
                         TextField("", text: $weatherViewModel.address)
 
                         Button("OK", action: {
-                            print("Fetching weather forecast for: \(weatherViewModel.address)")
                             fetchWeatherData()
                         })
                         Button("Cancel", role: .cancel) {}
