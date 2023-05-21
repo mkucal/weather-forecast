@@ -34,6 +34,7 @@
 		D6EC9BB02A1ABC1E007A794A /* HourlyForecastItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BAF2A1ABC1E007A794A /* HourlyForecastItemView.swift */; };
 		D6EC9BB22A1ABC4A007A794A /* DailyForecastItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BB12A1ABC4A007A794A /* DailyForecastItemView.swift */; };
 		D6EC9BB42A1ABC79007A794A /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BB32A1ABC79007A794A /* ActivityIndicatorView.swift */; };
+		D6EC9BB62A1AC09E007A794A /* WeatherForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BB52A1AC09E007A794A /* WeatherForecastViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		D6EC9BAF2A1ABC1E007A794A /* HourlyForecastItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastItemView.swift; sourceTree = "<group>"; };
 		D6EC9BB12A1ABC4A007A794A /* DailyForecastItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastItemView.swift; sourceTree = "<group>"; };
 		D6EC9BB32A1ABC79007A794A /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		D6EC9BB52A1AC09E007A794A /* WeatherForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastViewModel.swift; sourceTree = "<group>"; };
 		DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				D6EC9BA52A18F64D007A794A /* WeatherViewModel.swift */,
+				D6EC9BB52A1AC09E007A794A /* WeatherForecastViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				D6EC9BB42A1ABC79007A794A /* ActivityIndicatorView.swift in Sources */,
 				D6EC9BAE2A1ABBFC007A794A /* HourlyForecastView.swift in Sources */,
 				D6EC9BA42A18F477007A794A /* DateFormatter+Utils.swift in Sources */,
+				D6EC9BB62A1AC09E007A794A /* WeatherForecastViewModel.swift in Sources */,
 				D6EC9BAA2A1ABB8C007A794A /* CurrentWeatherView.swift in Sources */,
 				D65E09992A16CE6E00309613 /* ResponseProtocol.swift in Sources */,
 				D6EC9B982A16DA57007A794A /* Errors.swift in Sources */,
