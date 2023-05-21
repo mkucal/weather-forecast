@@ -20,7 +20,9 @@ struct ForecastView: View {
 
             let data = forecastViewModel?.dailyForecast?.data ?? []
 
-            Section("\(data.count) day forecast") {
+            let title = String(format: NSLocalizedString("%d day forecast", comment: ""), data.count)
+
+            Section(title) {
                 ForEach(0..<data.count, id: \.self) { index in
                     DailyForecastItemView(forecastViewModel: data[index])
                 }

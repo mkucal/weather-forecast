@@ -80,7 +80,9 @@ struct WeatherForecastView: View {
                     weatherViewModel.clearError()
                 })
             } message: {
-                Text("Fetching weather forecast for \(weatherViewModel.address) failed")
+                let text = String(format: NSLocalizedString("Fetching weather forecast for %@ failed", comment: ""),
+                                  weatherViewModel.address)
+                Text(text)
             }
             .disabled(showActivityIndicator)
             .blur(radius: showActivityIndicator ? 2 : 0)
