@@ -26,7 +26,7 @@ struct WeatherData {
 
 class WeatherViewModel: ObservableObject {
 
-    var address: String?
+    var address: String = ""
 
     @Published var fetchingState: WeatherDataFetchingState = .idle
     @Published var weatherData: WeatherData?
@@ -34,6 +34,36 @@ class WeatherViewModel: ObservableObject {
 
     private let geocoder = CLGeocoder()
     private let apiWorker: WeatherForecastApiWorkerProtocol = WeatherForecastApiWorker()
+
+    func fetchWeatherData() {
+        fetchWeatherData(for: address)
+    }
+}
+
+private extension WeatherViewModel {
+
+    func calculateLocation(for address: String) -> Promise<CLLocationCoordinate2D> {
+        return Promise { [weak self] resolved, rejected, _ in
+            guard let self = self else {
+                rejected(GeneralError.emptySelf)
+                return
+            }
+
+            self.geocoder.geocodeAddressString(address) { (placemarks, error) in
+                if let error = error {
+                    rejected(error)
+                    return
+                }
+
+                guard let location = placemarks?.first?.location?.coordinate else {
+                    rejected(GeocodingError.locationNotFound)
+                    return
+                }
+
+                resolved(location)
+            }
+        }
+    }
 
     func fetchWeatherData(for address: String) {
         guard fetchingState != .running else {
@@ -68,32 +98,6 @@ class WeatherViewModel: ObservableObject {
         }
         .always(in: .main) { [weak self] in
             self?.fetchingState = .idle
-        }
-    }
-}
-
-private extension WeatherViewModel {
-
-    func calculateLocation(for address: String) -> Promise<CLLocationCoordinate2D> {
-        return Promise { [weak self] resolved, rejected, _ in
-            guard let self = self else {
-                rejected(GeneralError.emptySelf)
-                return
-            }
-
-            self.geocoder.geocodeAddressString(address) { (placemarks, error) in
-                if let error = error {
-                    rejected(error)
-                    return
-                }
-
-                guard let location = placemarks?.first?.location?.coordinate else {
-                    rejected(GeocodingError.locationNotFound)
-                    return
-                }
-
-                resolved(location)
-            }
         }
     }
 }

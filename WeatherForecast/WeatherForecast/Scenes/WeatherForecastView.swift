@@ -12,6 +12,8 @@ struct WeatherForecastView: View {
 
     @ObservedObject private var weatherViewModel = WeatherViewModel()
 
+    @State private var enterCityAlertVisible = false
+
     var body: some View {
         VStack {
             HStack {
@@ -27,13 +29,22 @@ struct WeatherForecastView: View {
                 Spacer()
 
                 Button(action: {
-
+                    enterCityAlertVisible.toggle()
                 }) {
                     Image(systemName: "gearshape")
                         .resizable()
                         .frame(width: 40, height: 40)
                         .padding(.trailing, 20)
                 }
+                .alert("Enter city", isPresented: $enterCityAlertVisible) {
+                    TextField("", text: $weatherViewModel.address)
+
+                    Button("OK", action: {
+                        print("Fetching weather forecast for: \(weatherViewModel.address)")
+                        weatherViewModel.fetchWeatherData()
+                    })
+                    Button("Cancel", role: .cancel) {}
+                } message: {}
             }
             .padding(.top, 10)
 
