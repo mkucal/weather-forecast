@@ -142,17 +142,23 @@ struct HourlyForecastViewModel {
             return nil
         }
 
-        data = hourlyApiData.hourlyForecast?.data.map {
-            var viewModel = SpecifiedHourForecastViewModel()
-            viewModel.time = DateFormatter.WeatherForecast.hourlyForecast.string(from: $0.time ?? Date())
+        let now = Date()
 
-            let tempValue = String(describing: $0.temperature ?? 0.0)
-            let tempUnit = hourlyApiData.hourlyForecastUnits?.temperatureUnit ?? ""
+        data = hourlyApiData.hourlyForecast?.data
+            .filter {
+                $0.time ?? Date() > now
+            }
+            .map {
+                var viewModel = SpecifiedHourForecastViewModel()
+                viewModel.time = DateFormatter.WeatherForecast.hourlyForecast.string(from: $0.time ?? Date())
 
-            viewModel.temperature = tempValue + tempUnit
-            viewModel.weatherStateIconName = $0.weatherCode?.weatherStateData?.iconName
-            return viewModel
-        } ?? []
+                let tempValue = String(describing: $0.temperature ?? 0.0)
+                let tempUnit = hourlyApiData.hourlyForecastUnits?.temperatureUnit ?? ""
+
+                viewModel.temperature = tempValue + tempUnit
+                viewModel.weatherStateIconName = $0.weatherCode?.weatherStateData?.iconName
+                return viewModel
+            } ?? []
     }
 }
 
@@ -173,7 +179,10 @@ struct DailyForecastViewModel {
 
         data = dailyApiData.dailyForecast?.data.map {
             var viewModel = SpecifiedDayForecastViewModel()
-            viewModel.date = DateFormatter.WeatherForecast.dailyForecast.string(from: $0.time ?? Date())
+
+            let time = $0.time ?? Date()
+            viewModel.date = Calendar.current.isDateInToday(time) ? "Today"
+            : DateFormatter.WeatherForecast.dailyForecast.string(from: time)
 
             var tempValue = String(describing: $0.temperatureMin ?? 0.0)
             var tempUnit = dailyApiData.dailyForecastUnits?.temperatureMinUnit ?? ""
