@@ -28,6 +28,12 @@
 		D6EC9BA42A18F477007A794A /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA32A18F477007A794A /* DateFormatter+Utils.swift */; };
 		D6EC9BA62A18F64D007A794A /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA52A18F64D007A794A /* WeatherViewModel.swift */; };
 		D6EC9BA82A1A5FFC007A794A /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA72A1A5FFC007A794A /* Int+Utils.swift */; };
+		D6EC9BAA2A1ABB8C007A794A /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BA92A1ABB8C007A794A /* CurrentWeatherView.swift */; };
+		D6EC9BAC2A1ABBCF007A794A /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BAB2A1ABBCF007A794A /* ForecastView.swift */; };
+		D6EC9BAE2A1ABBFC007A794A /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BAD2A1ABBFC007A794A /* HourlyForecastView.swift */; };
+		D6EC9BB02A1ABC1E007A794A /* HourlyForecastItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BAF2A1ABC1E007A794A /* HourlyForecastItemView.swift */; };
+		D6EC9BB22A1ABC4A007A794A /* DailyForecastItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BB12A1ABC4A007A794A /* DailyForecastItemView.swift */; };
+		D6EC9BB42A1ABC79007A794A /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC9BB32A1ABC79007A794A /* ActivityIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +60,12 @@
 		D6EC9BA32A18F477007A794A /* DateFormatter+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Utils.swift"; sourceTree = "<group>"; };
 		D6EC9BA52A18F64D007A794A /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		D6EC9BA72A1A5FFC007A794A /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
+		D6EC9BA92A1ABB8C007A794A /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
+		D6EC9BAB2A1ABBCF007A794A /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
+		D6EC9BAD2A1ABBFC007A794A /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
+		D6EC9BAF2A1ABC1E007A794A /* HourlyForecastItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastItemView.swift; sourceTree = "<group>"; };
+		D6EC9BB12A1ABC4A007A794A /* DailyForecastItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastItemView.swift; sourceTree = "<group>"; };
+		D6EC9BB32A1ABC79007A794A /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		DEAD6ABE76F9671C6315037C /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +178,12 @@
 		D65E098B2A161B0B00309613 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D6EC9BA92A1ABB8C007A794A /* CurrentWeatherView.swift */,
+				D6EC9BAB2A1ABBCF007A794A /* ForecastView.swift */,
+				D6EC9BAD2A1ABBFC007A794A /* HourlyForecastView.swift */,
+				D6EC9BAF2A1ABC1E007A794A /* HourlyForecastItemView.swift */,
+				D6EC9BB12A1ABC4A007A794A /* DailyForecastItemView.swift */,
+				D6EC9BB32A1ABC79007A794A /* ActivityIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,15 +352,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D65E098E2A161B8000309613 /* AppTheme.swift in Sources */,
+				D6EC9BB02A1ABC1E007A794A /* HourlyForecastItemView.swift in Sources */,
 				D65E097B2A16199300309613 /* WeatherForecastView.swift in Sources */,
+				D6EC9BB42A1ABC79007A794A /* ActivityIndicatorView.swift in Sources */,
+				D6EC9BAE2A1ABBFC007A794A /* HourlyForecastView.swift in Sources */,
 				D6EC9BA42A18F477007A794A /* DateFormatter+Utils.swift in Sources */,
+				D6EC9BAA2A1ABB8C007A794A /* CurrentWeatherView.swift in Sources */,
 				D65E09992A16CE6E00309613 /* ResponseProtocol.swift in Sources */,
 				D6EC9B982A16DA57007A794A /* Errors.swift in Sources */,
 				D6EC9BA22A18ECBD007A794A /* Array+Utils.swift in Sources */,
+				D6EC9BB22A1ABC4A007A794A /* DailyForecastItemView.swift in Sources */,
 				D6EC9BA02A178D90007A794A /* WeatherForecastApiWorker.swift in Sources */,
 				D65E09792A16199300309613 /* WeatherForecastApp.swift in Sources */,
 				D65E09932A16CD1400309613 /* ApiProtocols.swift in Sources */,
 				D65E09952A16CDB200309613 /* Parameters.swift in Sources */,
+				D6EC9BAC2A1ABBCF007A794A /* ForecastView.swift in Sources */,
 				D6EC9B9E2A178338007A794A /* WeatherForecastApi.swift in Sources */,
 				D6EC9BA82A1A5FFC007A794A /* Int+Utils.swift in Sources */,
 				D6EC9BA62A18F64D007A794A /* WeatherViewModel.swift in Sources */,

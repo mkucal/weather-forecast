@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct AppTheme {
+
+    struct WeatherForecastView {
+        
+    }
+}
