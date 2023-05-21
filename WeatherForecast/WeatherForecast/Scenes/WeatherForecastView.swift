@@ -56,6 +56,7 @@ struct WeatherForecastView: View {
                     } message: {}
                 }
                 .padding(.top, 10)
+                .tint(Color(UIColor.darkGray))
 
                 Spacer()
 
@@ -64,7 +65,6 @@ struct WeatherForecastView: View {
                         .padding(.bottom, 10)
 
                     ForecastView(forecastViewModel: viewModel)
-                        .background(Color(UIColor.systemGroupedBackground))
                 } else {
                     Text("No weather forecast available")
                 }
@@ -123,7 +123,7 @@ struct ForecastView: View {
             }
 
             let data = forecastViewModel?.dailyForecast?.data ?? []
-            
+
             Section("\(data.count) day forecast") {
                 ForEach(0..<data.count, id: \.self) { index in
                     DailyForecastItemView(forecastViewModel: data[index])
@@ -162,7 +162,7 @@ struct HourlyForecastItemView: View {
         }
         .padding(.vertical, 10)
         .frame(width: 90)
-        .background(.gray)
+        .background(Color.gray.brightness(0.3))
         .cornerRadius(8)
     }
 }
@@ -198,7 +198,7 @@ struct ActivityIndicatorView: View {
         ProgressView()
             .progressViewStyle(.circular)
             .frame(width: 120, height: 120)
-            .background(.gray)
+            .background(Color.gray.brightness(0.3))
             .cornerRadius(8)
     }
 }
