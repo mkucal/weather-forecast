@@ -23,7 +23,11 @@ struct WeatherForecastView: View {
             VStack {
                 HStack {
                     Button(action: {
-
+                        if let weatherForecastViewModel = weatherViewModel.weatherForecastViewModel {
+                            weatherViewModel.address = weatherForecastViewModel.address
+                            print("Fetching weather forecast for: \(weatherViewModel.address)")
+                            weatherViewModel.fetchWeatherData()
+                        }
                     }) {
                         Image(systemName: "arrow.clockwise.circle")
                             .resizable()
