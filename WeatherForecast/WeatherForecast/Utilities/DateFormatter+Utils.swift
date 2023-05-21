@@ -29,5 +29,11 @@ extension DateFormatter {
             formatter.dateFormat = "HH:mm"
             return formatter
         }()
+
+        static let dailyForecast: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, MMM d"
+            return formatter
+        }()
     }
 }

@@ -172,9 +172,8 @@ struct DailyForecastViewModel {
         }
 
         data = dailyApiData.dailyForecast?.data.map {
-            // TODO:
             var viewModel = SpecifiedDayForecastViewModel()
-            viewModel.date = "Today"
+            viewModel.date = DateFormatter.WeatherForecast.dailyForecast.string(from: $0.time ?? Date())
 
             var tempValue = String(describing: $0.temperatureMin ?? 0.0)
             var tempUnit = dailyApiData.dailyForecastUnits?.temperatureMinUnit ?? ""
