@@ -143,9 +143,8 @@ struct HourlyForecastViewModel {
         }
 
         data = hourlyApiData.hourlyForecast?.data.map {
-            // TODO:
             var viewModel = SpecifiedHourForecastViewModel()
-            viewModel.time = "00:00"
+            viewModel.time = DateFormatter.WeatherForecast.hourlyForecast.string(from: $0.time ?? Date())
 
             let tempValue = String(describing: $0.temperature ?? 0.0)
             let tempUnit = hourlyApiData.hourlyForecastUnits?.temperatureUnit ?? ""
