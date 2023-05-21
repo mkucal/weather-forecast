@@ -147,13 +147,29 @@ struct HourlyForecastViewModel {
     }
 }
 
+struct SpecifiedDayForecastViewModel {
+    var date: String?
+    var temperatureMin: String?
+    var temperatureMax: String?
+    var weatherStateIconName: String?
+}
+
 struct DailyForecastViewModel {
-    // date, icon, temperature max and min
+    var data: [SpecifiedDayForecastViewModel] = []
 
     init?(dailyApiData: WeatherApiData?) {
         guard let dailyApiData = dailyApiData else {
             return nil
         }
 
+        data = dailyApiData.dailyForecast?.data.map { _ in
+            // TODO:
+            var viewModel = SpecifiedDayForecastViewModel()
+            viewModel.date = "Today"
+            viewModel.temperatureMin = "8℃"
+            viewModel.temperatureMax = "20℃"
+            viewModel.weatherStateIconName = "cloud"
+            return viewModel
+        } ?? []
     }
 }

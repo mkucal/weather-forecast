@@ -107,9 +107,10 @@ struct ForecastView: View {
             }
 
             Section("10 day forecast") {
-                DailyForecastItemView()
-                DailyForecastItemView()
-                DailyForecastItemView()
+                let data = forecastViewModel?.dailyForecast?.data ?? []
+                ForEach(0..<data.count, id: \.self) { index in
+                    DailyForecastItemView(forecastViewModel: data[index])
+                }
             }
         }
     }
@@ -151,18 +152,22 @@ struct HourlyForecastItemView: View {
 
 struct DailyForecastItemView: View {
 
+    let forecastViewModel: SpecifiedDayForecastViewModel?
+
     var body: some View {
         HStack {
-            Text("Today")
+            Text(forecastViewModel?.date ?? "")
                 .font(.callout)
                 .padding(.vertical, 10)
                 .frame(maxWidth: 100, alignment: .leading)
                 .background(.white)
             Spacer()
-            Image(systemName: "cloud")
+            Image(systemName: forecastViewModel?.weatherStateIconName ?? "")
                 .font(.title2)
             Spacer()
-            Text("8℃ / 20℃")
+
+            let temperatureStr = (forecastViewModel?.temperatureMin ?? "") + " / " + (forecastViewModel?.temperatureMax ?? "")
+            Text(temperatureStr)
                 .frame(maxWidth: 120, alignment: .trailing)
                 .background(.white)
         }
